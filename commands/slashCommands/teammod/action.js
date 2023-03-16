@@ -1213,10 +1213,10 @@ module.exports = async function main(client, interaction) {
     const fs = require("fs")
     
     let insertSafe = JSON.stringify(gen)
-    await fs.appendFile("../../../tmp/" + leaderId + ".json", insertSafe, ()=>{})
+    await fs.appendFile(leaderId + ".json", insertSafe, ()=>{})
     
     
-    await interaction.editReply({content: "Here is your archive for the team with channel <#" + cur.channelId + ">:", files:["../../../tmp/" + leaderId + ".json"]})
-    await fs.rm("../../../tmp/" + leaderId + ".json", ()=>{})
+    await interaction.editReply({content: "Here is your archive for the team with channel <#" + cur.channelId + ">:", files:[leaderId + ".json"]})
+    await fs.rm(leaderId + ".json", ()=>{})
   }
 };
