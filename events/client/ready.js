@@ -346,7 +346,7 @@ module.exports = async (Discord, client) => {
     return embed
   }
 
-  client.logAction = async function(user=false, description="\u200b", color=[88, 101, 242]){
+  client.logAction = async function(user=false, description="\u200b", color=[88, 101, 242], files=[]){
     if(!user)return
     let guildObject = await client.guilds.cache.get(guild)
     if(!guildObject)return
@@ -360,7 +360,7 @@ module.exports = async (Discord, client) => {
       .setColor(color)
       .setDescription(description)
       .setFooter({text:`ID: ${user.id}`})
-    ]})
+    ], files: files})
   }
 
   console.log("Game jam bot is online!");
