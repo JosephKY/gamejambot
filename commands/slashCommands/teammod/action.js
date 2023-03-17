@@ -166,7 +166,7 @@ module.exports = async function main(client, interaction) {
     await interaction.deferReply({ ephemeral: true });
 
     if (
-      interaction.member.roles.cache.some((role) => jamModIds.includes(role.id))
+      interaction.member.roles.cache.some((role) => client.jamModIds.includes(role.id))
     ) {
       let leaderOption = interaction.options.getUser("leader");
       leaderOption = leaderOption.id;
@@ -209,6 +209,43 @@ module.exports = async function main(client, interaction) {
       let jamRole = await teamGuild.roles.cache.get(client.jamRoleId);
 
       if (cur != null) {
+        let compiledInfo = "";
+
+        compiledInfo = compiledInfo + "**Team Leader:** <@" + cur.leaderId + ">\n";
+
+        compiledInfo = compiledInfo + "**Current Teammates:** ";
+        cur.teammates.forEach((id) => {
+          compiledInfo = compiledInfo + "<@" + id + ">, ";
+        });
+
+        compiledInfo = compiledInfo + "\n";
+
+        compiledInfo = compiledInfo + "**Permanent Teammate Record:** ";
+        cur.teammatesPerm.forEach((id) => {
+          compiledInfo = compiledInfo + "<@" + id + ">, ";
+        });
+        compiledInfo = compiledInfo + "\n";
+
+        compiledInfo = compiledInfo + "**Invited Members:** ";
+        cur.invited.forEach((id) => {
+          compiledInfo = compiledInfo + "<@" + id + ">, ";
+        });
+
+        compiledInfo = compiledInfo + "\n**Game:** " + cur.game + "\n";
+
+        compiledInfo =
+          compiledInfo + "**Team Channel:** " + cur.channelId + "\n";
+
+        compiledInfo =
+          compiledInfo +
+          "**Created:** <t:" +
+          Math.floor(cur.created / 1000) +
+          ":F>\n";
+
+        compiledInfo = compiledInfo + "**Team Name:** " + cur.name + "\n";
+        await client.logAction(interaction.user, `Team deleted by <@${interaction.user.id}>\n\n` + compiledInfo, [237, 66, 69])
+        
+
         cur.teammates.forEach(async (mate) => {
           await db.delete("jamUser-" + mate);
           let mmb = await teamGuild.members.cache.get(mate);
@@ -238,7 +275,7 @@ module.exports = async function main(client, interaction) {
     await interaction.deferReply({ ephemeral: true });
 
     if (
-      interaction.member.roles.cache.some((role) => jamModIds.includes(role.id))
+      interaction.member.roles.cache.some((role) => client.jamModIds.includes(role.id))
     ) {
       let leaderId = interaction.options.getUser("leader");
       leaderId = leaderId.id;
@@ -298,7 +335,7 @@ module.exports = async function main(client, interaction) {
     await interaction.deferReply({ ephemeral: true });
 
     if (
-      interaction.member.roles.cache.some((role) => jamModIds.includes(role.id))
+      interaction.member.roles.cache.some((role) => client.jamModIds.includes(role.id))
     ) {
       let leaderId = interaction.options.getUser("leader");
       leaderId = leaderId.id;
@@ -403,7 +440,7 @@ module.exports = async function main(client, interaction) {
     await interaction.deferReply({ ephemeral: true });
 
     if (
-      interaction.member.roles.cache.some((role) => jamModIds.includes(role.id))
+      interaction.member.roles.cache.some((role) => client.jamModIds.includes(role.id))
     ) {
       let leaderOption = interaction.options.getUser("leader");
       leaderOption = leaderOption.id;
@@ -495,7 +532,7 @@ module.exports = async function main(client, interaction) {
     await interaction.deferReply({ ephemeral: true });
 
     if (
-      interaction.member.roles.cache.some((role) => jamModIds.includes(role.id))
+      interaction.member.roles.cache.some((role) => client.jamModIds.includes(role.id))
     ) {
       let leaderId = interaction.options.getUser("leader");
       leaderId = leaderId.id;
@@ -1010,9 +1047,9 @@ module.exports = async function main(client, interaction) {
       },
     ];
 
-    modRoles.forEach(mr=>{
+    modRoles.forEach(mr => {
       defaultPerms.push({
-        id:mr.id,
+        id: mr.id,
         allow: [PermissionsBitField.Flags.ViewChannel],
       })
     })
