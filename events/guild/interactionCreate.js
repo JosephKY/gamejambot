@@ -48,7 +48,7 @@ module.exports = async (Discord, client, interaction) => {
               .setDescription(
                 "The maximum amount of teams have been reached and creating a team is no longer possible. Sorry!"
               )
-              .setColor("0xED4245"),
+              .setColor([237, 66, 69]),
           ],
           ephemeral: true,
         });
@@ -63,7 +63,7 @@ module.exports = async (Discord, client, interaction) => {
               .setDescription(
                 "The game jam has already begun and it is no longer possible to start new teams or join any existing teams. Sorry!"
               )
-              .setColor("0xED4245"),
+              .setColor([237, 66, 69]),
           ],
           ephemeral: true,
         });
@@ -78,7 +78,7 @@ module.exports = async (Discord, client, interaction) => {
               .setDescription(
                 "You are either blacklisted from the marketplace or you are blacklisted from game jams. Either consequence is a disqualifier for any game jam participation. If you want to try and appeal these blacklists, create a ticket in <#813074276538253332>"
               )
-              .setColor("0xED4245"),
+              .setColor([237, 66, 69]),
           ],
           ephemeral: true,
         });
@@ -93,7 +93,7 @@ module.exports = async (Discord, client, interaction) => {
               .setDescription(
                 "You must have at least one skill rank to create a team"
               )
-              .setColor("0xED4245")
+              .setColor([237, 66, 69])
           ],
           ephemeral: true,
           components:[
@@ -119,7 +119,7 @@ module.exports = async (Discord, client, interaction) => {
                   currentJam["channelId"] +
                   ">"
               )
-              .setColor("0xED4245"),
+              .setColor([237, 66, 69]),
           ],
           ephemeral: true,
         });
@@ -134,7 +134,7 @@ module.exports = async (Discord, client, interaction) => {
               .setDescription(
                 "You can't start a team if you're already in one. If you want to leave your team and start one yourself, contact a moderator in <#813074276538253332>"
               )
-              .setColor("0xED4245"),
+              .setColor([237, 66, 69]),
           ],
           ephemeral: true,
         });
@@ -142,10 +142,15 @@ module.exports = async (Discord, client, interaction) => {
       }
 
       const { PermissionsBitField } = require("discord.js");
-      let modRole = interaction.guild.roles.cache.find(
-        (r) => r.id === client.jamModId
-      );
-      if (!modRole) {
+      let modRoles = []
+      client.jamModIds.forEach(mid=>{
+        let modRole = interaction.guild.roles.cache.find(
+          (r) => r.id === mid
+        );
+        if(!modRole)return
+        modRoles.push(modRole)
+      })
+      if (modRoles.length == 0) {
         interaction.reply({
           embeds: [
             new EmbedBuilder()
@@ -153,7 +158,7 @@ module.exports = async (Discord, client, interaction) => {
               .setDescription(
                 "Channel permissions couldn't properly be set and the bot failed to create your team. Please try again later!"
               )
-              .setColor("0xED4245"),
+              .setColor([237, 66, 69]),
           ],
           ephemeral: true,
         });
@@ -181,12 +186,15 @@ module.exports = async (Discord, client, interaction) => {
           {
             id: interaction.user.id,
             allow: [PermissionsBitField.Flags.ViewChannel],
-          },
-          {
-            id: modRole.id,
-            allow: [PermissionsBitField.Flags.ViewChannel],
-          },
+          }
         ];
+
+        modRoles.forEach(mr=>{
+          defaultPerms.push({
+            id:mr.id,
+            allow: [PermissionsBitField.Flags.ViewChannel],
+          })
+        })
 
         teamChannel.setParent(client.jamCategory).catch(async ()=>{
           let staffChannel = await interaction.guild.channels.cache.get(client.jamStaffChannel)
@@ -196,7 +204,7 @@ module.exports = async (Discord, client, interaction) => {
                 new EmbedBuilder()
                 .setTitle("⚠️ Max Channels Reached!")
                 .setDescription("The max channels for the designated game jam teams channel category has been reached and the backup category was used. Please create a new category and configure the bot to use it.")
-                .setColor("0xF1C40F")
+                .setColor([241, 196, 15])
                 .setTimestamp()
               ]
             })
@@ -208,7 +216,7 @@ module.exports = async (Discord, client, interaction) => {
                   new EmbedBuilder()
                   .setTitle("⚠️ Backup Category Failed!")
                   .setDescription(`The backup category was attempted and the attempt failed. **Team channel <#${teamChannel.id}> has no category**`)
-                  .setColor("0xF1C40F")
+                  .setColor([241, 196, 15])
                   .setTimestamp()
                 ]
               })
@@ -227,11 +235,11 @@ module.exports = async (Discord, client, interaction) => {
               .setDescription(
                 "Welcome to your team channel! You can get started by checking out the following slash commands:\n\n</team summary:1030918955822485606> - View a summary of your team's information\n</team help:1030918955822485606> - View help and information for a specific issue\n</team invite:1030918955822485606> - Invite a member in the server to join your team. This can only be done once per member\n</team game:1030918955822485606> - Set the Roblox experience URL associated with your game\n</team name:1030918955822485606> - Set the name for your team\n\nWithdrawing, deleting your team, transferring leadership, or removing teammates require moderator approval. To get approval, create a ticket in <#813074276538253332> and talk to a moderator"
               )
-              .setColor("0x5865F2")
+              .setColor([88, 101, 242])
               .setTimestamp(),
             new EmbedBuilder()
               .setTitle("👑 Current Leader")
-              .setColor("0xF1C40F")
+              .setColor([241, 196, 15])
               .setDescription(
                 "The leader of this team is <@" + interaction.user.id + ">"
               ),
@@ -279,7 +287,7 @@ module.exports = async (Discord, client, interaction) => {
                   teamChannel.id +
                   ">"
               )
-              .setColor("0x57F287"),
+              .setColor([87, 242, 135]),
           ],
           ephemeral: true,
         });
@@ -292,7 +300,7 @@ module.exports = async (Discord, client, interaction) => {
               .setDescription(
                 "An unknown error occurred and the bot failed to create your team. Please try again later!"
               )
-              .setColor("0xED4245"),
+              .setColor([237, 66, 69]),
           ],
           ephemeral: true,
         });
@@ -314,7 +322,7 @@ module.exports = async (Discord, client, interaction) => {
               .setDescription(
                 "The game jam has already begun and it is no longer possible to join any teams. Sorry!"
               )
-              .setColor("0xED4245"),
+              .setColor([237, 66, 69]),
           ],
           ephemeral: true,
         });
@@ -326,7 +334,7 @@ module.exports = async (Discord, client, interaction) => {
         interaction.reply({
           embeds: [
             new EmbedBuilder()
-              .setColor("0xED4245")
+              .setColor([237, 66, 69])
               .setTitle("❌ Cannot Accept Invite")
               .setDescription(
                 "You're already associated with a team and you cannot be in two teams at once"
@@ -342,7 +350,7 @@ module.exports = async (Discord, client, interaction) => {
         interaction.reply({
           embeds: [
             new EmbedBuilder()
-              .setColor("0xED4245")
+              .setColor([237, 66, 69])
               .setTitle("❌ Error Occurred")
               .setDescription(
                 "There was a problem retrieving the invite data. Please try again later!"
@@ -358,7 +366,7 @@ module.exports = async (Discord, client, interaction) => {
         interaction.reply({
           embeds: [
             new EmbedBuilder()
-              .setColor("0xED4245")
+              .setColor([237, 66, 69])
               .setTitle("❌ Expired")
               .setDescription(
                 "This invite has expired and no responses can be made anymore"
@@ -384,7 +392,7 @@ module.exports = async (Discord, client, interaction) => {
               .setDescription(
                 "There was a problem loading guild data. Please try again later!"
               )
-              .setColor("0xED4245"),
+              .setColor([237, 66, 69]),
           ],
           ephemeral: true,
         });
@@ -401,7 +409,7 @@ module.exports = async (Discord, client, interaction) => {
               .setDescription(
                 "There was a problem loading member data. Please try again later!"
               )
-              .setColor("0xED4245"),
+              .setColor([237, 66, 69]),
           ],
           ephemeral: true,
         });
@@ -418,7 +426,7 @@ module.exports = async (Discord, client, interaction) => {
               .setDescription(
                 "You are either blacklisted from the marketplace or you are blacklisted from game jams. Either consequence is a disqualifier for any game jam participation. If you want to try and appeal these blacklists, create a ticket in <#813074276538253332>"
               )
-              .setColor("0xED4245"),
+              .setColor([237, 66, 69]),
           ],
           ephemeral: true,
         });
@@ -430,7 +438,7 @@ module.exports = async (Discord, client, interaction) => {
         interaction.reply({
           embeds: [
             new EmbedBuilder()
-              .setColor("0xED4245")
+              .setColor([237, 66, 69])
               .setTitle("❌ Error Occurred")
               .setDescription(
                 "There was a problem retrieving the inviter data. Please try again later!"
@@ -450,7 +458,7 @@ module.exports = async (Discord, client, interaction) => {
         interaction.reply({
           embeds: [
             new EmbedBuilder()
-              .setColor("0xED4245")
+              .setColor([237, 66, 69])
               .setTitle("❌ Error Occurred")
               .setDescription(
                 "There was a discrepancy in the invite data and this invite cannot be used anymore"
@@ -478,7 +486,7 @@ module.exports = async (Discord, client, interaction) => {
         interaction.reply({
           embeds: [
             new EmbedBuilder()
-              .setColor("0xED4245")
+              .setColor([237, 66, 69])
               .setTitle("❌ Too Many Members")
               .setDescription(
                 "The team this invite is related to currently has too many teammates and this invite is currently invalid"
@@ -497,7 +505,7 @@ module.exports = async (Discord, client, interaction) => {
         interaction.reply({
           embeds: [
             new EmbedBuilder()
-              .setColor("0xED4245")
+              .setColor([237, 66, 69])
               .setTitle("❌ Error Occurred")
               .setDescription(
                 "The team associated with this invite no longer exists and this invite is now invalid"
@@ -554,7 +562,7 @@ module.exports = async (Discord, client, interaction) => {
         embeds: [
           new EmbedBuilder()
             .setTitle("🎉 Invite Accepted")
-            .setColor("0x57F287")
+            .setColor([87, 242, 135])
             .setTimestamp()
             .setDescription(
               "Member <@" +
@@ -569,7 +577,7 @@ module.exports = async (Discord, client, interaction) => {
       interaction.reply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0x57F287")
+            .setColor([87, 242, 135])
             .setTitle("✅ Invite Accepted")
             .setDescription(
               "Invite was accepted successfully! You can find your team's channel in <#" +
@@ -635,7 +643,7 @@ module.exports = async (Discord, client, interaction) => {
           .setDescription(genDesc)
           .setFooter({text: "Page " + (ogData.page + 1) + " of " + pages.length + ", " + total + " results total"})
           .setTimestamp()
-          .setColor("0x7289DA")
+          .setColor([114, 137, 218])
         ]
       }
       
@@ -709,7 +717,7 @@ module.exports = async (Discord, client, interaction) => {
           .setDescription(genDesc)
           .setFooter({text: "Page " + (ogData.page + 1) + " of " + pages.length + ", " + total + " results total"})
           .setTimestamp()
-          .setColor("0x7289DA")
+          .setColor([114, 137, 218])
         ]
       }
       
@@ -747,7 +755,7 @@ module.exports = async (Discord, client, interaction) => {
         let err = new EmbedBuilder()
           .setTitle("⚠ Your post was not submitted")
           .setTimestamp()
-          .setColor("#FEE75C");
+          .setColor([254, 231, 92]);
 
         if (check.some((val) => val.includes("roblox.com/games/"))) {
           err.setDescription(
@@ -775,7 +783,7 @@ module.exports = async (Discord, client, interaction) => {
             "Your post is now live and viewable by all users.\nIf you want your post removed, create a ticket in <#813074276538253332>"
           )
           .setTimestamp()
-          .setColor("#57F287");
+          .setColor([87, 242, 135]);
 
         let actions = new ActionRowBuilder().addComponents(
           new ButtonBuilder()

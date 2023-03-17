@@ -64,14 +64,14 @@ module.exports = async (Discord, client) => {
     "1029577239467130890" // Game jam blacklist (testing server)
   ]
 
-  let guild = "704616349330309200"
+  let guild = "448986884497211392"
 
-  client.jamCategory = "1085997566224777217";
-  client.jamBackupCategory = "1085997607760973895";
-  client.jamModId = "853313067856953395";
-  client.jamStaffChannel = "704616349330309203"
-  client.jamLogId = "704616349330309203";
-  client.jamRoleId = "942160824636678154";
+  client.jamCategory = "1086059056801792120";
+  client.jamBackupCategory = "1086061268407959642";
+  client.jamModIds = ["1086065905399767060", "480493349443469333", "664102752829571083"];
+  client.jamStaffChannel = "727153507471327233"
+  client.jamLogId = "727153507471327233";
+  client.jamRoleId = "1086065219882721321";
 
   client.minTeamNameLength = 3
   client.maxTeamNameLength = 50
@@ -318,7 +318,7 @@ module.exports = async (Discord, client) => {
   // END OF CONFIGURATION VARIABLES
 
   let errorEmbedTemplate = new EmbedBuilder()
-  .setColor("0xED4245")
+  .setColor([237, 66, 69])
   .setTitle("❌ Error")
   .setDescription("An error occurred")
   .setFooter({
@@ -358,7 +358,7 @@ module.exports = async (Discord, client) => {
     await db.set("jamGeneral",defaultData )
   }
 
-  let commands = [
+  let guildCommands = [
     new SlashCommandBuilder()
       .setDescription("Configure your game jam team")
       .setName("team")
@@ -646,7 +646,7 @@ module.exports = async (Discord, client) => {
     
   ];
 
-  commands.forEach((command) => {
+  guildCommands.forEach((command) => {
     client.guilds.cache.get(guild).commands.create(command);
   });
 
@@ -667,7 +667,7 @@ module.exports = async (Discord, client) => {
               .setTitle("❌ Fatal Error")
               .setDescription("A fatal error occurred and this command could not complete. Staff are actively looking into the issue. Please try again later")
               .setTimestamp()
-              .setColor("0xE74C3C")
+              .setColor([237, 66, 69])
             ]
           }
           

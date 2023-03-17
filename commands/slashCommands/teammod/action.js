@@ -26,7 +26,7 @@ module.exports = async function main(client, interaction) {
             0 < messagePage.size ? messagePage.at(messagePage.size - 1) : null;
         });
     }
-    
+
     return messages
   }
 
@@ -40,7 +40,7 @@ module.exports = async function main(client, interaction) {
     await interaction.editReply({
       embeds: [
         new EmbedBuilder()
-          .setColor("0xED4245")
+          .setColor([237, 66, 69])
           .setTitle("❌ Error")
           .setDescription(
             "You can only use this command within the Roblox Studio Community server"
@@ -124,7 +124,7 @@ module.exports = async function main(client, interaction) {
     let debugEmbed = new EmbedBuilder()
       .setTitle("👤 User Team Data")
       .setTimestamp()
-      .setColor("0x99AAb5")
+      .setColor([153, 170, 181])
       .setDescription(compiledInfo);
 
     interaction.editReply({
@@ -164,7 +164,7 @@ module.exports = async function main(client, interaction) {
     await interaction.deferReply({ ephemeral: true });
 
     if (
-      interaction.member.roles.cache.some((role) => role.id === client.jamModId)
+      interaction.member.roles.cache.some((role) => jamModIds.includes(role.id))
     ) {
       let leaderOption = interaction.options.getUser("leader");
       leaderOption = leaderOption.id;
@@ -236,7 +236,7 @@ module.exports = async function main(client, interaction) {
     await interaction.deferReply({ ephemeral: true });
 
     if (
-      interaction.member.roles.cache.some((role) => role.id == client.jamModId)
+      interaction.member.roles.cache.some((role) => jamModIds.includes(role.id))
     ) {
       let leaderId = interaction.options.getUser("leader");
       leaderId = leaderId.id;
@@ -280,7 +280,7 @@ module.exports = async function main(client, interaction) {
       teamChannel.send({
         embeds: [
           new EmbedBuilder()
-            .setColor("0x5865F2")
+            .setColor([88, 101, 242])
             .setTitle("✍ Name Changed")
             .setDescription("Team name changed to ``" + newName + "``")
             .setTimestamp(),
@@ -295,7 +295,7 @@ module.exports = async function main(client, interaction) {
     await interaction.deferReply({ ephemeral: true });
 
     if (
-      interaction.member.roles.cache.some((role) => role.id == client.jamModId)
+      interaction.member.roles.cache.some((role) => jamModIds.includes(role.id))
     ) {
       let leaderId = interaction.options.getUser("leader");
       leaderId = leaderId.id;
@@ -363,12 +363,12 @@ module.exports = async function main(client, interaction) {
       teamChannel.send({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("💥 Teammate Removed")
             .setDescription(
               "Teammate <@" +
-                removingId +
-                "> was removed from the team by server staff"
+              removingId +
+              "> was removed from the team by server staff"
             )
             .setTimestamp(),
         ],
@@ -398,7 +398,7 @@ module.exports = async function main(client, interaction) {
     await interaction.deferReply({ ephemeral: true });
 
     if (
-      interaction.member.roles.cache.some((role) => role.id == client.jamModId)
+      interaction.member.roles.cache.some((role) => jamModIds.includes(role.id))
     ) {
       let leaderOption = interaction.options.getUser("leader");
       leaderOption = leaderOption.id;
@@ -457,14 +457,14 @@ module.exports = async function main(client, interaction) {
         embeds: [
           new EmbedBuilder()
             .setTimestamp()
-            .setColor("0x5865F2")
+            .setColor([88, 101, 242])
             .setTitle("👑 Leadership Transferred")
             .setDescription(
               "Team leadership was alternatively transferred from <@" +
-                leaderOption +
-                "> to <@" +
-                newLeader +
-                ">"
+              leaderOption +
+              "> to <@" +
+              newLeader +
+              ">"
             ),
         ],
       });
@@ -488,7 +488,7 @@ module.exports = async function main(client, interaction) {
     await interaction.deferReply({ ephemeral: true });
 
     if (
-      interaction.member.roles.cache.some((role) => role.id == client.jamModId)
+      interaction.member.roles.cache.some((role) => jamModIds.includes(role.id))
     ) {
       let leaderId = interaction.options.getUser("leader");
       leaderId = leaderId.id;
@@ -539,7 +539,7 @@ module.exports = async function main(client, interaction) {
       let debugEmbed = new EmbedBuilder()
         .setTitle("🤝 Team Data")
         .setTimestamp()
-        .setColor("0x99AAb5")
+        .setColor([153, 170, 181])
         .setDescription(compiledInfo);
 
       interaction.editReply({
@@ -579,7 +579,7 @@ module.exports = async function main(client, interaction) {
       embeds: [
         new EmbedBuilder()
           .setTitle(title)
-          .setColor("0x7289DA")
+          .setColor([114, 137, 218])
           .setDescription(desc),
       ],
       components: [
@@ -639,7 +639,7 @@ module.exports = async function main(client, interaction) {
       embeds: [
         new EmbedBuilder()
           .setTitle("📄 General Data")
-          .setColor("0x99AAb5")
+          .setColor([153, 170, 181])
           .setTimestamp()
           .setDescription(desc),
       ],
@@ -738,7 +738,7 @@ module.exports = async function main(client, interaction) {
             text: "Page 1 of " + pages.length + ", " + total + " results total",
           })
           .setTimestamp()
-          .setColor("0x7289DA"),
+          .setColor([114, 137, 218]),
       ],
     };
 
@@ -869,7 +869,7 @@ module.exports = async function main(client, interaction) {
             text: "Page 1 of " + pages.length + ", " + total + " results total",
           })
           .setTimestamp()
-          .setColor("0x7289DA"),
+          .setColor([114, 137, 218]),
       ],
     };
 
@@ -935,7 +935,7 @@ module.exports = async function main(client, interaction) {
       return;
     }
 
-    if(general.count == undefined){
+    if (general.count == undefined) {
       general.count = client.maxTeams
     }
 
@@ -950,8 +950,15 @@ module.exports = async function main(client, interaction) {
     }
 
     const { PermissionsBitField } = require("discord.js");
-    let modRole = interaction.guild.roles.cache.find((r) => r.id === client.jamModId);
-    if (!modRole) {
+    let modRoles = []
+    client.jamModIds.forEach(mid => {
+      let modRole = interaction.guild.roles.cache.find(
+        (r) => r.id === mid
+      );
+      if (!modRole) return
+      modRoles.push(modRole)
+    })
+    if (modRoles.length == 0) {
       interaction.editReply(
         "Fatal: couldn't set permissions for new channel, team not created"
       );
@@ -984,11 +991,14 @@ module.exports = async function main(client, interaction) {
         id: leaderId,
         allow: [PermissionsBitField.Flags.ViewChannel],
       },
-      {
-        id: modRole.id,
-        allow: [PermissionsBitField.Flags.ViewChannel],
-      },
     ];
+
+    modRoles.forEach(mr=>{
+      defaultPerms.push({
+        id:mr.id,
+        allow: [PermissionsBitField.Flags.ViewChannel],
+      })
+    })
 
     teamChannel.setParent(client.jamCategory).catch(() => {
       console.log("MAX CATEGORY CHANNELS REACHED PLEASE FIX");
@@ -1003,23 +1013,23 @@ module.exports = async function main(client, interaction) {
           .setDescription(
             "Welcome to your team channel! You can get started by checking out the following slash commands:\n\n</team summary:1030918955822485606> - View a summary of your team's information\n</team help:1030918955822485606> - View help and information for a specific issue\n</team invite:1030918955822485606> - Invite a member in the server to join your team. This can only be done once per member\n</team game:1030918955822485606> - Set the Roblox experience URL associated with your game\n</team name:1030918955822485606> - Set the name for your team\n\nWithdrawing, deleting your team, transferring leadership, or removing teammates require moderator approval. To get approval, create a ticket in <#813074276538253332> and talk to a moderator"
           )
-          .setColor("0x5865F2")
+          .setColor([88, 101, 242])
           .setTimestamp(),
         new EmbedBuilder()
           .setTitle("👑 Current Leader")
-          .setColor("0xF1C40F")
+          .setColor([241, 196, 15])
           .setDescription("The leader of this team is <@" + leaderId + ">"),
         //new EmbedBuilder()
         //  .setTitle("❗ Important")
-        //  .setColor("0xED4245")
+        //  .setColor([237, 66, 69])
         //  .setDescription("Your team status must be set to '✅ Submitted' with </team status:1029237145979846707> by the time the jam is over. Setting your status to this submits your project, and not submitting your project will most likely result in it being ignored.")
         new EmbedBuilder()
           .setTitle("❗ Important")
-          .setColor("0xED4245")
+          .setColor([237, 66, 69])
           .setDescription(
             "This team was forcefully created by staff member <@" +
-              interaction.user.id +
-              ">"
+            interaction.user.id +
+            ">"
           ),
       ],
     };
@@ -1110,67 +1120,67 @@ module.exports = async function main(client, interaction) {
       embeds: [
         new EmbedBuilder()
           .setTitle("❗ Teammate Added")
-          .setColor("0xED4245")
+          .setColor([237, 66, 69])
           .setDescription(
             "Teammate <@" +
-              mateId +
-              "> was forcefully added to the teammate by staff member <@" +
-              interaction.user.id +
-              ">"
+            mateId +
+            "> was forcefully added to the teammate by staff member <@" +
+            interaction.user.id +
+            ">"
           ),
       ],
     });
 
     interaction.editReply("Team forcefully created");
   }
-  
-  if (subcommand == "archive"){
+
+  if (subcommand == "archive") {
     await interaction.deferReply();
     let teammateId = interaction.options.getUser("user").id;
     let leaderId = await db.get("jamUser-" + teammateId)
-    
-    if(leaderId == null){
+
+    if (leaderId == null) {
       await interaction.editReply("User specified is not in a team")
       return
     }
-    
+
     let cur = await db.get("jamTeamData-" + leaderId)
-    
-    if(cur == null){
+
+    if (cur == null) {
       await interaction.editReply("Failed to get team data")
       return
     }
-    
+
     let channel = await interaction.guild.channels.cache.get(cur.channelId)
-    
-    if(!channel){
+
+    if (!channel) {
       await interaction.editReply("Failed to get team channel")
       return
     }
-    
+
     let gen = {
-      team:cur,
-      messages:[]
+      team: cur,
+      messages: []
     }
-    
+
     let template = {
-      tag:undefined,
-      bot:undefined,
-      username:undefined,
-      discriminator:undefined,
-      nickname:undefined,
-      userid:undefined,
-      profile_picture:undefined,
-      content:undefined,
-      createdAt:undefined,
-      createdTimestamp:undefined,
-      id:undefined
+      tag: undefined,
+      bot: undefined,
+      username: undefined,
+      discriminator: undefined,
+      nickname: undefined,
+      userid: undefined,
+      profile_picture: undefined,
+      content: undefined,
+      createdAt: undefined,
+      createdTimestamp: undefined,
+      id: undefined
     }
-    
+
     let messages = (await fetchAllMessages(channel))
-    
-    for(var message of messages){
-      let insert = Object.assign({}, template) 
+
+    for (var message of messages) {
+      let insert = Object.assign({}, template)
       insert.tag = message.author.tag
       insert.bot = message.author.bot
       insert.username = message.author.username
@@ -1181,10 +1191,10 @@ module.exports = async function main(client, interaction) {
       insert.createdAt = message.createdAt
       insert.createdTimestamp = message.createdTimestamp
       insert.id = message.id
-      
+
       let attachments = []
-      
-      for(var attachment of message.attachments){
+
+      for (var attachment of message.attachments) {
         let compiled = {}
         compiled.contentType = attachment.contentType
         compiled.description = attachment.description
@@ -1192,31 +1202,31 @@ module.exports = async function main(client, interaction) {
         compiled.spoiler = attachment.spoiler
         compiled.url = attachment.url
         compiled.size = attachment.size
-        
+
         attachments.push(compiled)
       }
-      
+
       insert.attachments = attachments
-      
+
       let embeds = []
-      
-      message.embeds.forEach(embed=>{
+
+      message.embeds.forEach(embed => {
         embeds.push(embed.data)
       })
-      
+
       insert.embeds = embeds
 
       gen.messages.push(insert)
-      
+
     }
-    
+
     const fs = require("fs")
-    
+
     let insertSafe = JSON.stringify(gen)
-    await fs.appendFile(leaderId + ".json", insertSafe, ()=>{})
-    
-    
-    await interaction.editReply({content: "Here is your archive for the team with channel <#" + cur.channelId + ">:", files:[leaderId + ".json"]})
-    await fs.rm(leaderId + ".json", ()=>{})
+    await fs.appendFile(leaderId + ".json", insertSafe, () => { })
+
+
+    await interaction.editReply({ content: "Here is your archive for the team with channel <#" + cur.channelId + ">:", files: [leaderId + ".json"] })
+    await fs.rm(leaderId + ".json", () => { })
   }
 };

@@ -56,7 +56,7 @@ module.exports = async function main(client, interaction) {
       embeds:[
         new EmbedBuilder()
         .setTitle("ℹ Team Summary")
-        .setColor("0x7289DA")
+        .setColor([114, 137, 218])
         .setTimestamp()
         .setDescription(genDesc)
       ]
@@ -76,7 +76,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Team Not Found")
             .setDescription(
               "Either an error occurred finding your team or you do not own a team. Keep in mind only team leaders can change the name of their team"
@@ -92,7 +92,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Error Occurred")
             .setDescription(
               "Something went wrong getting game jam data. Please try again later!"
@@ -107,7 +107,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Withdraw Rejected")
             .setDescription(
               "The game jam has already started and you can no longer officially withdraw without permission. To request permission, ask a moderator by creating a ticket in <#813074276538253332>\n\nNote that you are not *required* to complete the jam"
@@ -122,7 +122,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Withdraw Rejected")
             .setDescription(
               "You can't withdraw without permission while you have teammates in your team. To request permission, ask a moderator by creating a ticket in <#813074276538253332>"
@@ -148,7 +148,7 @@ module.exports = async function main(client, interaction) {
       embeds:[
         new EmbedBuilder()
         .setTitle("ℹ Help and Information")
-        .setColor("0x3498DB")
+        .setColor([52, 152, 219])
         .setDescription(content)
         .setTimestamp()
       ],
@@ -175,7 +175,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Team Not Found")
             .setDescription(
               "Either an error occurred finding your team or you do not own a team. Keep in mind only team leaders can change the name of their team"
@@ -190,7 +190,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Cannot Set Status")
             .setDescription(
               "You tried to set your status to what is already your current status"
@@ -207,7 +207,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Cannot Set Status")
             .setDescription(
               "You cannot set your team status until the game jam starts at <t:" + Math.floor(general.jamstart / 1000) + ":F>"
@@ -222,7 +222,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Cannot Set Status")
             .setDescription(
               "Set your Roblox game with </team game:1030918955822485606> before changing your status"
@@ -237,7 +237,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Cannot Set Status")
             .setDescription(
               "You cannot set your team status now because the jam is over"
@@ -253,7 +253,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Error Occurred")
             .setDescription(
               "There was a problem retrieving the guild associated with your team. Please try again later"
@@ -269,7 +269,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Error Occurred")
             .setDescription(
               "There was a problem retrieving the channel associated with your team. Please try again later"
@@ -283,7 +283,7 @@ module.exports = async function main(client, interaction) {
     teamChannel.send({
       embeds: [
         new EmbedBuilder()
-          .setColor("0x5865F2")
+          .setColor([88, 101, 242])
           .setTitle("📄 Status Changed")
           .setDescription(
             "Team status changed to ``" +
@@ -307,7 +307,7 @@ module.exports = async function main(client, interaction) {
     interaction.editReply({
       embeds: [
         new EmbedBuilder()
-          .setColor("0x57F287")
+          .setColor([87, 242, 136])
           .setTitle("✅ Team Status Set")
           .setDescription("Your team status has been set to ``" + equivalent[newStatus] + "``")
           .setTimestamp(),
@@ -399,7 +399,7 @@ module.exports = async function main(client, interaction) {
     interaction.editReply({
       embeds: [
         new EmbedBuilder()
-          .setColor("0x57F287")
+          .setColor([87, 242, 136])
           .setTitle("✅ Team Name Set")
           .setDescription("Your team's name has been set to ``" + name + "``")
           .setTimestamp(),
@@ -409,7 +409,7 @@ module.exports = async function main(client, interaction) {
     teamChannel.send({
       embeds: [
         new EmbedBuilder()
-          .setColor("0x5865F2")
+          .setColor([88, 101, 242])
           .setTitle("✍ Name Changed")
           .setDescription(
             "Team name changed to ``" +
@@ -441,7 +441,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Action Disallowed")
             .setDescription(
               "You cannot transfer leadership to the current leader"
@@ -456,7 +456,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Teammate Not Found")
             .setDescription(
               "The user selected either could not be found or is not a participating teammate"
@@ -477,7 +477,7 @@ module.exports = async function main(client, interaction) {
     interaction.editReply({
       embeds: [
         new EmbedBuilder()
-          .setColor("0x57F287")
+          .setColor([87, 242, 136])
           .setTitle("✅ Leadership Transferred")
           .setDescription(
             "Leadership was transferred successfully. If you did this by mistake, contact a moderator in <#813074276538253332>"
@@ -492,7 +492,7 @@ module.exports = async function main(client, interaction) {
       interaction.reply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Error Occurred")
             .setDescription(
               "There was a problem retrieving the guild associated with your team. Please try again later"
@@ -512,7 +512,7 @@ module.exports = async function main(client, interaction) {
       interaction.reply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Error Occurred")
             .setDescription(
               "There was a problem retrieving the channel associated with your team. Please try again later"
@@ -529,7 +529,7 @@ module.exports = async function main(client, interaction) {
       embeds: [
         new EmbedBuilder()
           .setTimestamp()
-          .setColor("0x5865F2")
+          .setColor([88, 101, 242])
           .setTitle("👑 Leadership Transferred")
           .setDescription(
             "Team leadership was transferred from <@" +
@@ -550,7 +550,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Team Not Found")
             .setDescription(
               "Either an error occurred finding your team or you do not own a team. Keep in mind only team leaders can change the game URL"
@@ -571,7 +571,7 @@ module.exports = async function main(client, interaction) {
             .setDescription(
               "The game jam has ended and you cannot change your game URL anymore"
             )
-            .setColor("0xED4245"),
+            .setColor([237, 66, 69]),
         ],
       });
       return;
@@ -585,7 +585,7 @@ module.exports = async function main(client, interaction) {
             .setDescription(
               "You can't set your game URL until the jam begins!"
             )
-            .setColor("0xED4245"),
+            .setColor([237, 66, 69]),
         ],
       });
       return;
@@ -598,7 +598,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Invalid URL")
             .setDescription(
               "The URL you entered was not accepted because it is an invalid URL. Make sure it is a full URL, protocol included\n\n❌ ``roblox.com/games/47324/Sword-Fights-on-the-Heights-IV``\n❌ ``www.roblox.com/games/47324/Sword-Fights-on-the-Heights-IV``\n✅ ``https://roblox.com/games/47324/Sword-Fights-on-the-Heights-IV``\n✅ ``https://www.roblox.com/games/47324/Sword-Fights-on-the-Heights-IV``"
@@ -620,7 +620,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Invalid URL")
             .setDescription(
               "The URL you entered was not accepted because it is not a roblox link"
@@ -643,7 +643,7 @@ module.exports = async function main(client, interaction) {
             embeds: [
               new EmbedBuilder()
                 .setTitle("⚠ Underage Detected")
-                .setColor("0xFEE75C")
+                .setColor([254, 230, 92])
                 .setTimestamp()
                 .setDescription(
                   "A web.roblox.com link was submitted for a game jam team URL"
@@ -681,7 +681,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Invalid URL")
             .setDescription(
               "The URL you entered was not accepted because it is not a roblox game link"
@@ -703,7 +703,7 @@ module.exports = async function main(client, interaction) {
     interaction.editReply({
       embeds: [
         new EmbedBuilder()
-          .setColor("0x57F287")
+          .setColor([87, 242, 136])
           .setTitle("✅ Game Link Updated")
           .setDescription("Your team's game link was updated successfully")
           .setTimestamp(),
@@ -716,7 +716,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Error Occured")
             .setDescription(
               "There was a problem retrieving the invitee through the guild data. Please try again later!"
@@ -735,7 +735,7 @@ module.exports = async function main(client, interaction) {
           new EmbedBuilder()
             .setTitle("🌐 Game Link Updated")
             .setDescription("The team game URL was updated to:\n" + game)
-            .setColor("0x5865F2")
+            .setColor([88, 101, 242])
             .setTimestamp(),
         ],
       });
@@ -750,7 +750,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Team Not Found")
             .setDescription(
               "Either an error occurred finding your team or you do not own a team. Keep in mind only team leaders can invite members to a team"
@@ -771,7 +771,7 @@ module.exports = async function main(client, interaction) {
               .setDescription(
                 "The game jam has already begun and it is no longer possible to invite anyone to any team. Sorry!"
               )
-              .setColor("0xED4245"),
+              .setColor([237, 66, 69]),
           ],
         });
         return;
@@ -781,7 +781,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Invite Rejected")
             .setDescription(
               "You cannot have more than 4 teammates"
@@ -799,7 +799,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Error Occurred")
             .setDescription(
               "There was a problem getting the user's member data. Please try again later"
@@ -815,7 +815,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Invite Rejected")
             .setDescription(
               "The member you attempted to invite is not allowed to participate in a game jam because of a marketplace or game jam blacklist"
@@ -830,7 +830,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Invite Rejected")
             .setDescription(
               "You already invited this member. You cannot invite the same person more than once"
@@ -845,7 +845,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Invite Rejected")
             .setDescription(
               "You cannot invite a bot!"
@@ -860,7 +860,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Invite Failed")
             .setDescription(
               "The member you tried to invite is already associated with your team"
@@ -876,7 +876,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Invite Failed")
             .setDescription(
               "The member you tried to invite is already associated with another team"
@@ -892,7 +892,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Error Occured")
             .setDescription(
               "There was a problem retrieving the invitee through the guild data. Please try again later!"
@@ -908,7 +908,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Error Occured")
             .setDescription(
               "There was a problem retrieving the invitee. Please try again later!"
@@ -927,7 +927,7 @@ module.exports = async function main(client, interaction) {
         embeds:[
           new EmbedBuilder()
           .setTitle("✉ You're Invited!")
-          .setColor("0x57F287")
+          .setColor([87, 242, 136])
           .setDescription(client.string("teamInvite1") + interaction.user.id + client.string("teamInvite2"))
           .setTimestamp()
         ],
@@ -963,7 +963,7 @@ module.exports = async function main(client, interaction) {
         interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Invite Rejected")
             .setDescription(
               "The member you tried to invite could not be invited because they only accept direct messages from friends or have disabled direct messages from strangers in this server"
@@ -985,7 +985,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-          .setColor("0x57F287")
+          .setColor([87, 242, 136])
           .setTitle("✅ Member Invited")
           .setDescription("<@" + invitee.id + "> was successfully invited to join your team")
           .setTimestamp(),
@@ -998,7 +998,7 @@ module.exports = async function main(client, interaction) {
         interaction.reply({
           embeds: [
             new EmbedBuilder()
-              .setColor("0xED4245")
+              .setColor([237, 66, 69])
               .setTitle("❌ Error Occured")
               .setDescription(
                 "There was a problem retrieving the invitee through the guild data. Please try again later!"
@@ -1017,7 +1017,7 @@ module.exports = async function main(client, interaction) {
           embeds: [
             new EmbedBuilder()
               .setTimestamp()
-              .setColor("0x5865F2")
+              .setColor([88, 101, 242])
               .setTitle("✉ Invitation Sent")
               .setDescription("Member <@" + invitee.id + "> was invited to join the team by team leader <@" + interaction.user.id + ">"),
           ],
@@ -1029,7 +1029,7 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setColor("0xED4245")
+            .setColor([237, 66, 69])
             .setTitle("❌ Invite Rejected")
             .setDescription(
               "The member you tried to invite could not be invited because they only accept direct messages from friends or have disabled direct messages from strangers in this server"
