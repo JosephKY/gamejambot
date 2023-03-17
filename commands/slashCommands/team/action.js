@@ -389,6 +389,7 @@ module.exports = async function main(client, interaction) {
           client.errorEmbed("9","TeamName")
         ],
       });
+      client.logAction(interaction.user, `Rejected team rename to ${"`"}${name}${"`"}`, [237, 66, 69])
       return;
     }
 
@@ -421,6 +422,8 @@ module.exports = async function main(client, interaction) {
           .setTimestamp(),
       ],
     });
+
+    client.logAction(interaction.user, `Renamed team to ${"`"}${name}${"`"}`)
   }
   if (subcommand == "transfer") {
     
@@ -709,6 +712,8 @@ module.exports = async function main(client, interaction) {
           .setTimestamp(),
       ],
     });
+
+    client.logAction(interaction.user, `Updated team game URL to ${"`"}${gameUrl}${"`"}`)
     
     let teamGuild = await client.guilds.cache.get(cur.guildId)
     if(!teamGuild){
@@ -991,6 +996,8 @@ module.exports = async function main(client, interaction) {
           .setTimestamp(),
         ],
       });
+
+      client.logAction(interaction.user, `Invited member <@${await memberObject.id}> to team`)
       
       let teamGuild = await client.guilds.cache.get(cur.guildId)
       if(!teamGuild){

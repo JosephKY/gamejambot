@@ -130,6 +130,8 @@ module.exports = async function main(client, interaction) {
     interaction.editReply({
       embeds: [debugEmbed],
     });
+
+    client.logAction(interaction.user, `Viewed team data for user <@${userOption}>`, [254, 230, 92])
   }
 
   if (subcommand == "delete") {
@@ -289,6 +291,7 @@ module.exports = async function main(client, interaction) {
 
       cur["name"] = newName;
       await db.set("jamTeamData-" + leaderId, cur);
+      client.logAction(interaction.user, `Forced team <#${await teamChannel.id}> name to ${newName}`, [254, 230, 92])
     }
   }
   if (subcommand == "remove") {
@@ -387,6 +390,8 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         content: "User removed from team successfully",
       });
+
+      client.logAction(interaction.user, `Removed teammate <@${removingId}> from team <#${teamChannel.id}>`, [254, 230, 92])
     } else {
       interaction.editReply({
         content:
@@ -482,6 +487,8 @@ module.exports = async function main(client, interaction) {
       cur.teammates.forEach(async (mate) => {
         await db.set("jamUser-" + mate, newLeader);
       });
+
+      client.logAction(interaction.user, `Forced team leader transfer from <@${leaderOption}> to <@${newLeader}>`, [254, 230, 92])
     }
   }
   if (subcommand == "team") {
@@ -545,6 +552,8 @@ module.exports = async function main(client, interaction) {
       interaction.editReply({
         embeds: [debugEmbed],
       });
+
+      client.logAction(interaction.user, `Viewed team data for team <#${cur.channelId}>`, [254, 230, 92])
     }
   }
 
@@ -598,6 +607,8 @@ module.exports = async function main(client, interaction) {
     interaction.editReply({
       content: "Game jam interface deployed successfully",
     });
+
+    client.logAction(interaction.user, `Deployed team creation interface in <#${interaction.channel.id}>`)
   }
 
   if (subcommand == "jamstart") {
@@ -613,6 +624,8 @@ module.exports = async function main(client, interaction) {
       content:
         "Jam has been set to start at <t:" + Math.floor(time / 1000) + ":F>",
     });
+
+    client.logAction(interaction.user, `Set game jam to start at <t:${Math.floor(time / 1000)}:F>`, [254, 230, 92])
   }
 
   if (subcommand == "general") {
@@ -659,6 +672,8 @@ module.exports = async function main(client, interaction) {
       content:
         "Jam has been set to end at <t:" + Math.floor(time / 1000) + ":F>",
     });
+
+    client.logAction(interaction.user, `Set game jam to end at <t:${Math.floor(time / 1000)}:F>`, [254, 230, 92])
   }
 
   if (subcommand == "seeall") {
@@ -906,6 +921,7 @@ module.exports = async function main(client, interaction) {
     console.log(await db.get("jamInteractionData-" + interaction.id));
 
     interaction.editReply(replyPayload);
+    client.logAction(interaction.user, `Viewed all submitted game jam games`, [254, 230, 92])
   }
 
   if (subcommand == "resetinv") {
@@ -920,6 +936,7 @@ module.exports = async function main(client, interaction) {
     cur.invited = [];
     await db.set("jamTeamData-" + leaderId, cur);
     interaction.editReply("Invites reset");
+    client.logAction(interaction.user, `Reset invites for team <#${cur.channelId}>`, [254, 230, 92])
   }
 
   if (subcommand == "addteam") {
@@ -1063,6 +1080,8 @@ module.exports = async function main(client, interaction) {
     }
 
     interaction.editReply("Team forcefully created");
+
+    client.logAction(interaction.user, `Forcefully created team <#${teamChannel.id}> with leader <@${leaderId}>`, [254, 230, 92])
   }
 
   if (subcommand == "addmate") {
@@ -1131,7 +1150,8 @@ module.exports = async function main(client, interaction) {
       ],
     });
 
-    interaction.editReply("Team forcefully created");
+    interaction.editReply("Teammate forcefully added");
+    client.logAction(interaction.user, `Forcefully added new teammate <@${mateId}> to <#${await teamChannel.id}>`, [254, 230, 92])
   }
 
   if (subcommand == "archive") {
@@ -1228,5 +1248,7 @@ module.exports = async function main(client, interaction) {
 
     await interaction.editReply({ content: "Here is your archive for the team with channel <#" + cur.channelId + ">:", files: [leaderId + ".json"] })
     await fs.rm(leaderId + ".json", () => { })
+
+    client.logAction(interaction.user, `Archived team <#${cur.channelId}> in <#${await interaction.channel.id}>`, [254, 230, 92])
   }
 };

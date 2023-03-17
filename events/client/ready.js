@@ -70,7 +70,7 @@ module.exports = async (Discord, client) => {
   client.jamBackupCategory = "1086061268407959642";
   client.jamModIds = ["1086065905399767060", "480493349443469333", "664102752829571083"];
   client.jamStaffChannel = "727153507471327233"
-  client.jamLogId = "727153507471327233";
+  client.jamLogId = "1031568051398787113";
   client.jamRoleId = "1086065219882721321";
 
   client.minTeamNameLength = 3
@@ -344,6 +344,23 @@ module.exports = async (Discord, client) => {
     .setTimestamp();
 
     return embed
+  }
+
+  client.logAction = async function(user=false, description="\u200b", color=[88, 101, 242]){
+    if(!user)return
+    let guildObject = await client.guilds.cache.get(guild)
+    if(!guildObject)return
+    let logChannel = await guildObject.channels.cache.get(client.jamLogId)
+    if(!logChannel)return
+    logChannel.send({embeds: [
+      new EmbedBuilder()
+      .setTitle("\u200b")
+      .setAuthor({ name: await user.tag, iconURL: await user.avatarURL()})
+      .setTimestamp()
+      .setColor(color)
+      .setDescription(description)
+      .setFooter({text:`ID: ${user.id}`})
+    ]})
   }
 
   console.log("Game jam bot is online!");

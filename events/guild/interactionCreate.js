@@ -291,6 +291,8 @@ module.exports = async (Discord, client, interaction) => {
           ],
           ephemeral: true,
         });
+
+        client.logAction(interaction.user, `Created team <#${await teamChannel.id}>`, [235, 69, 158])
       } catch (error) {
         console.log(error);
         interaction.reply({
@@ -587,6 +589,8 @@ module.exports = async (Discord, client, interaction) => {
             .setTimestamp(),
         ],
       });
+
+      client.logAction(interaction.user, `Accepted invite from <@${cur.leader}> for team <#${cur.channel}>`, [87, 242, 136])
     }
     
     if (interaction.customId.startsWith("jSV_")){
