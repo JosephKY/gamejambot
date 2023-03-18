@@ -1,0 +1,45 @@
+{
+    "skillRoles": [
+
+    ],
+    "badRoles": [
+
+    ],
+    "guild": "",
+    "jamCategory": "",
+    "jamBackupCategory": "",
+    "jamModIds": [
+
+    ],
+    "jamStaffChannel": "",
+    "jamLogId": "",
+    "jamRoleId": "",
+    "minTeamNameLength": 0,
+    "maxTeamNameLength": 100,
+    "maxTeammates": 5,
+    "maxTeams": 100,
+    "swears": [
+        
+    ],
+    "strings": { 
+        "errors": {
+            "1": "Application commands must be used in a server!",
+            "2": "Either an error occurred finding your team or you are not in a team",
+            "3": "An error occurred retrieving your team data. Please try again later",
+            "4": "Either an error occurred finding your team or you are not a team leader.\nNote: Only team leaders can use this command",
+            "5": "The game jam has concluded and this command can no longer be used",
+            "6": "An error occurred while retrieving the guild. Please try again later",
+            "7": "An error occurred retrieving the team channel. Please try again later",
+            "8": "Team names must be between 3 and 50 characters long",
+            "9": "Your chosen team name was moderated for inappropriate content and was not set"
+        },
+        "helpContent-0": "**😢 Withdrawing From The Jam**\n\n*If you're a team leader and want to withdraw*: You may be able to either leave your team and choose a new leader, or archive your team.\n\n*If you're a teammate*: You may be able to leave your team.\n\nFor either case, create a ticket in <#813074276538253332> and request moderator approval",
+        "helpContent-1": "**💔 Removing a Teammate**\n\nIf you're having a conflict with another teammate, for problems such as a lack of productivity or unpleasantness, it's best to attempt and try and work it out with them first.\n\nIf you feel like there's no scenario where they can continue being a viable teammate, you can create a ticket in <#813074276538253332> and request a moderator to remove them. You'll need to provide context to the situation and why they must be removed",
+        "helpContent-2": "**💌 Inviting Teammates**\n\nYou can invite anyone to your team as long as they're in the server and don't have a marketplace or game jam blacklist. Try not to invite random people. Rather, invite your friends!\n\nTo get started inviting members, use </team invite:1030918955822485606>**",
+        "helpContent-3": "**✅ Submitting Your Game**\n\nWhen you feel ready, you can submit your game at any time after the game jam begins and before it ends. You simply need to set your Roblox game's URL with </team game:1030918955822485606>. You can do this at any time, your project doesn't have to be complete!\n\nThis is something you *must* do before the jam ends, or your creation will most likely not be considered.",
+        "helpContent-4": "**✍ Personalizing Your Team**\n\nYou can customize your team by using the </team name:1030918955822485606> command. Your new name will be applied to your team data and your team's channel name. Please note that all names are subject to moderation",
+        "helpContent-5": "**👑 Leadership**\n\nLeadership is how we decide who can and can't configure important team data. The leader, usually the team creator, is the only one that can configure the team. We disallow all team members from having leadership to prevent trolling or spam.\n\nIf leadership must be transferred to another teammate for emergency reasons, you can request a moderator to transfer leadership in <#813074276538253332>",
+        "teamInvite1": "You're invited to participate in the game jam with <@",
+        "teamInvite2": ">'s team.\n\n*There is no obligation to participate*"
+    }
+}
