@@ -88,14 +88,15 @@ module.exports = async (Discord, client) => {
 
   let db = client.db
 
-  client.getTeamData = function(){
-
+  client.getTeamData = async function(userId){
+    return await db.get(`jamTeamData-${userId}`);
   }
   
   if (await db.get("jamGeneral") == null){
     let defaultData = {
       "jamstart":0,
       "jamend":0,
+      "count":config.maxTeams
     }
     await db.set("jamGeneral",defaultData )
   }
