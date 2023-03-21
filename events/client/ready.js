@@ -5,6 +5,8 @@ const https = require("https");
 const table = require("text-table");
 const { PermissionFlagsBits, SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
+const config = JSON.parse(fs.readFileSync("config.json"))
+
 module.exports = async (Discord, client) => {
   
   client.user.setPresence({ activities: [{ name: '/team help' }], status: 'online' })
@@ -13,307 +15,26 @@ module.exports = async (Discord, client) => {
 
   // If you're confused, look at README.md
 
-  client.skillRoles = [
-    "853313067856953395", // test role i used
-    
-    "513792282604994579", // S1
-    "513792587212128256", // 3D1
-    "513792524473729025", // B1
-    "524359638855057409", // GUI1
-    "513792867379183627", // A1
-    "513794484853800970", // GFX1
-    "524359260122120221", // SFX1
-    "513795009150189568", // E1
-    "728956327698628609", // C1
-    
-    "457152189950066690", // S2
-    "494712657413144576", // 3D2
-    "457151805978181634", // B2
-    "494709310497095680", // GUI2
-    "494708474278707201", // A2
-    "457152798862082059", // GFX2
-    "524718229294284805", // SFX2
-    "509854637164331018", // E2
-    "728956428894601236", // C2
-    
-    "506602134297509888",
-    "524735821790707712",
-    "504790528353894401",
-    "524734265456590848",
-    "524722130110119936",
-    "524734072828854282",
-    "524736287144411146",
-    "524736129719730178",
-    "728956489053765672",
-    
-    "847620390158598154",
-    "847658063125282839",
-    "847621122165178368",
-    "847621730531934259",
-    "847658107294711831",
-    "847658144343916545",
-    "847622149217058836",
-    "847658206355783691",
-    "847658250803085322",
-    
-  ];
+  client.skillRoles = config.skillRoles;
+  client.badRoles = config.badRoles;
 
-  client.badRoles = [
-    "1029577694335213608", // Game jam blacklist
-    "737798603053203528", // Marketplace blacklist
-    "1029577239467130890" // Game jam blacklist (testing server)
-  ]
+  let guild = config.guild;
 
-  let guild = "448986884497211392"
+  client.jamCategory = config.jamCategory;
+  client.jamBackupCategory = config.jamBackupCategory;
+  client.jamModIds = config.jamModIds;
+  client.jamStaffChannel = config.jamStaffChannel;
+  client.jamLogId = config.jamLogId;
+  client.jamRoleId = config.jamRoleId;
 
-  client.jamCategory = "1086059056801792120";
-  client.jamBackupCategory = "1086061268407959642";
-  client.jamModIds = ["1086065905399767060", "480493349443469333", "664102752829571083"];
-  client.jamStaffChannel = "727153507471327233"
-  client.jamLogId = "1031568051398787113";
-  client.jamRoleId = "1086065219882721321";
-
-  client.minTeamNameLength = 3
-  client.maxTeamNameLength = 50
-  client.maxTeammates = 4
-  client.maxTeams = 250
+  client.minTeamNameLength = config.minTeamNameLength;
+  client.maxTeamNameLength = config.maxTeamNameLength;
+  client.maxTeammates = config.maxTeammates;
+  client.maxTeams = config.maxTeams;
   
-  client.swears = [
-    "nigga",
-    "nigger",
-    "higger",
-    "niggers",
-    "niger",
-    "nigeria",
-    "nigerias",
-    "nigge",
-    "nigges",
-    "niggs",
-    "ngger",
-    "nibba",
-    "nibbas",
-    "nibbers",
-    "negro",
-    "negros",
-    "neggers",
-    "neggs",
-    "neggas",
-    "niggas",
-    "n1gg4",
-    "higgers",
-    "higger",
-    "nig",
-    "nigs",
-    "niga",
-    "nigas",
-    "nigers",
-    "nighas",
-    "nighers",
-    "nigghas",
-    "nigghers",
-    "nigget",
-    "niggets",
-    "migga",
-    "miggas",
-    "migger",
-    "nxxigger",
-    "nogga",
-    "noggas",
-    "chink",
-    "chinks",
-    "tard",
-    "tards",
-    "rtard",
-    "rtards",
-    "retard",
-    "retards",
-    "retardo",
-    "ratard",
-    "retardedness",
-    "retarrrded",
-    "retarde",
-    "retardando",
-    "retardism",
-    "tarded",
-    "retardation",
-    "rettardd",
-    "rettardedd",
-    "retrded",
-    "retardsd",
-    "retar",
-    "retarrded",
-    "retarrrded",
-    "recktarded",
-    "rretarrded",
-    "retardant",
-    "ritarded",
-    "rtarded",
-    "retarded",
-    "retardted",
-    "ritard",
-    "fucktard",
-    "fag",
-    "fags",
-    "dyke",
-    "dike",
-    "tranny",
-    "trannie",
-    "trannys",
-    "trannies",
-    "faggot",
-    "faggots",
-    "newfag",
-    "oldfag",
-    "newfags",
-    "oldfags",
-    "fahot",
-    "faaaahhot",
-    "faggotism",
-    "faxxggxxot",
-    "faxxgor",
-    "creampie",
-    "cum",
-    "cums",
-    "cuxms",
-    "cummed",
-    "cumed",
-    "cumming",
-    "cummies",
-    "cummy",
-    "kum",
-    "kummed",
-    "kumming",
-    "kummies",
-    "kummy",
-    "creams",
-    "creaming",
-    "creamed",
-    "sperm",
-    "sperms",
-    "spurm",
-    "nutted",
-    "nutting",
-    "cock",
-    "cocks",
-    "cocko",
-    "kock",
-    "dick",
-    "dicks",
-    "dicked",
-    "dvick",
-    "dickx",
-    "shlong",
-    "penis",
-    "penises",
-    "peaness",
-    "peanesses",
-    "peanus",
-    "dingaling",
-    "foreskin",
-    "forskin",
-    "vagina",
-    "vaginas",
-    "vagin",
-    "coochie",
-    "coochies",
-    "kochie",
-    "cochie",
-    "kuchi",
-    "cuchi",
-    "koochie",
-    "kucchie",
-    "pussy",
-    "pussie",
-    "pussys",
-    "pussies",
-    "pusie",
-    "pusy",
-    "puscsy",
-    "pucsssy",
-    "puzzy",
-    "cunt",
-    "anus",
-    "anuses",
-    "butthole",
-    "buttholes",
-    "anas",
-    "anal",
-    "shota",
-    "shotas",
-    "bdsm",
-    "cbt",
-    "virgin",
-    "virgins",
-    "hentai",
-    "kink",
-    "kinks",
-    "kinky",
-    "boob",
-    "boobs",
-    "bobs",
-    "tit",
-    "tits",
-    "titty",
-    "titties",
-    "fap",
-    "fapping",
-    "fapped",
-    "masturbate",
-    "masturbation",
-    "fornication",
-    "rape",
-    "rapes",
-    "raped",
-    "raper",
-    "raping",
-    "dildo",
-    "dildos",
-    "sex",
-    "sexed",
-    "seggs",
-    "segs",
-    "secks",
-    "sxual",
-    "sxually",
-    "porn",
-    "prn",
-    "sexual",
-    "nudes",
-    "orgy",
-    "orgie",
-    "kys",
-    "!rank",
-    "cunt",
-    "allahuakbar",
-    "porchmonkey",
-    "jiggaboo",
-    "redskin",
-    "horny",
-    "r34",
-    "R34",
-  ];
+  client.swears = config.swears;
 
-  client.strings = { // Don't change the keys! It will break some responses (unless you fix them manually)
-    errors:{ 
-      "1":"Application commands must be used in a server!",
-      "2":"Either an error occurred finding your team or you are not in a team",
-      "3":"An error occurred retrieving your team data. Please try again later",
-      "4":"Either an error occurred finding your team or you are not a team leader.\nNote: Only team leaders can use this command",
-      "5":"The game jam has concluded and this command can no longer be used",
-      "6":"An error occurred while retrieving the guild. Please try again later",
-      "7":"An error occurred retrieving the team channel. Please try again later",
-      "8":`Team names must be between ${client.minTeamNameLength} and ${client.maxTeamNameLength} characters long`,
-      "9":"Your chosen team name was moderated for inappropriate content and was not set"
-    },
-    "helpContent-0":"**😢 Withdrawing From The Jam**\n\n*If you're a team leader and want to withdraw*: You may be able to either leave your team and choose a new leader, or archive your team.\n\n*If you're a teammate*: You may be able to leave your team.\n\nFor either case, create a ticket in <#813074276538253332> and request moderator approval",
-    "helpContent-1":"**💔 Removing a Teammate**\n\nIf you're having a conflict with another teammate, for problems such as a lack of productivity or unpleasantness, it's best to attempt and try and work it out with them first.\n\nIf you feel like there's no scenario where they can continue being a viable teammate, you can create a ticket in <#813074276538253332> and request a moderator to remove them. You'll need to provide context to the situation and why they must be removed",
-    "helpContent-2":"**💌 Inviting Teammates**\n\nYou can invite anyone to your team as long as they're in the server and don't have a marketplace or game jam blacklist. Try not to invite random people. Rather, invite your friends!\n\nTo get started inviting members, use </team invite:1030918955822485606>**",
-    "helpContent-3":"**✅ Submitting Your Game**\n\nWhen you feel ready, you can submit your game at any time after the game jam begins and before it ends. You simply need to set your Roblox game's URL with </team game:1030918955822485606>. You can do this at any time, your project doesn't have to be complete!\n\nThis is something you *must* do before the jam ends, or your creation will most likely not be considered.",
-    "helpContent-4":"**✍ Personalizing Your Team**\n\nYou can customize your team by using the </team name:1030918955822485606> command. Your new name will be applied to your team data and your team's channel name. Please note that all names are subject to moderation",
-    "helpContent-5":"**👑 Leadership**\n\nLeadership is how we decide who can and can't configure important team data. The leader, usually the team creator, is the only one that can configure the team. We disallow all team members from having leadership to prevent trolling or spam.\n\nIf leadership must be transferred to another teammate for emergency reasons, you can request a moderator to transfer leadership in <#813074276538253332>",
-    "teamInvite1": "You're invited to participate in the game jam with <@",
-    "teamInvite2": ">'s team.\n\n*There is no obligation to participate*"
-  }
+  client.strings = config.strings;
 
   // END OF CONFIGURATION VARIABLES
 
@@ -363,14 +84,19 @@ module.exports = async (Discord, client) => {
     ], files: files})
   }
 
-  console.log("Game jam bot is online!");
+  console.log("Game Jam Bot is online!");
 
   let db = client.db
+
+  client.getTeamData = async function(userId){
+    return await db.get(`jamTeamData-${userId}`);
+  }
   
   if (await db.get("jamGeneral") == null){
     let defaultData = {
       "jamstart":0,
       "jamend":0,
+      "count":config.maxTeams
     }
     await db.set("jamGeneral",defaultData )
   }

@@ -75,7 +75,7 @@ module.exports = async function main(client, interaction) {
       return;
     }
 
-    let cur = await db.get("jamTeamData-" + userData);
+    let cur = await client.getTeamData(userData);
     if (cur == null) {
       interaction.editReply({
         content:
