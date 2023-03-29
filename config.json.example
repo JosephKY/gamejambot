@@ -12,6 +12,7 @@
 
     ],
     "jamStaffChannel": "",
+    "jamOutreachChannel":"",
     "jamLogId": "",
     "jamRoleId": "",
     "minTeamNameLength": 0,

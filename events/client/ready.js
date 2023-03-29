@@ -91,6 +91,10 @@ module.exports = async (Discord, client) => {
   client.getTeamData = async function(userId){
     return await db.get(`jamTeamData-${userId}`);
   }
+
+  client.outreachPost = async function(title, description){
+    
+  }
   
   if (await db.get("jamGeneral") == null){
     let defaultData = {
@@ -143,6 +147,11 @@ module.exports = async (Discord, client) => {
               .setDescription("The name you want for your team")
               .setRequired(true);
           });
+      })
+      .addSubcommand((outreachSc) => {
+        return outreachSc
+          .setName("outreach")
+          .setDescription("Need developers? Consider an outreach post!")
       })
       .addSubcommand((gameSc) => {
         return gameSc
